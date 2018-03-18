@@ -9,5 +9,6 @@ namespace nl.hyperdata.blockchain
         int Nonce { get; set;}
         byte[] PreviousHash { get; set;}
         DateTime TimeStamp { get; }
+        String MinersPublicKey { get; set; }
     }
 }

@@ -8,13 +8,15 @@ namespace nl.hyperdata.blockchain.console
     class Program
     {
         private static Random random = new Random(DateTime.Now.Millisecond);
-        private static readonly IBlock genesis = new Block(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 });
+        private static readonly IBlock genesis = new Block(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }, "");
 
         /** proof of work (https://en.wikipedia.org/wiki/Proof-of-work_system)  is set here: a hash needs 2 trailing zero bytes, increase the number of bytes to reduce the number of valid  hashes, and increse the proof of work time **/
         private static readonly byte[] difficulty = new byte[] { 0x00, 0x00 };
 
         static void Main(string[] args)
         {
+
+            String minersPubKey = "ThisIsTheMinersPublickKey";
 
             /** Initiate the chain, set a difficulty for genarating the hash (proof of work) 
             and define the genesis data (not really important) **/
@@ -27,7 +29,9 @@ namespace nl.hyperdata.blockchain.console
                 var data = Enumerable.Range(0, 256).Select(x => (byte)random.Next());
 
                 /** add the fresh, unhashed block with the data to the chain **/
-                chain.Add(new Block(data.ToArray()));
+                // The miners public key is passed to the block for serial
+                // Proof of work
+                chain.Add(new Block(data.ToArray(), minersPubKey));
 
                 /**-> blockchain magic happens here <-**/
 

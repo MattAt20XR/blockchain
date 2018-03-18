@@ -4,14 +4,15 @@ namespace nl.hyperdata.blockchain
 {
     public class Block : IBlock
     {
-        public Block(byte[] data)
+        public Block(byte[] data, String minersPubLey)
         {
             Data = data ?? throw new ArgumentNullException(nameof(data));
-            Nonce = 0;
+            Nonce = -1;
             PreviousHash = new byte[] { 0x00 };
             TimeStamp = DateTime.Now;
-
+            MinersPublicKey = minersPubLey;
         }
+
         public byte[] Data { get; }
 
         public byte[] Hash { get; set; }
@@ -21,6 +22,8 @@ namespace nl.hyperdata.blockchain
         public int Nonce { get; set; }
 
         public DateTime TimeStamp { get; }
+
+        public String MinersPublicKey { get; set; }
 
         public override string ToString()
         {
