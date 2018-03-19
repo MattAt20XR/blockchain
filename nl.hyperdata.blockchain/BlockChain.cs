@@ -6,38 +6,40 @@ namespace nl.hyperdata.blockchain
 {
     public class BlockChain : IEnumerable<IBlock>
     {
-        private List<IBlock> items = new List<IBlock>();
+        private List<IBlock> blocks = new List<IBlock>();
 
-        public BlockChain(byte[] difficulty, IBlock genesis)
+        public BlockChain(IBlock genesis)
         {
-            Difficulty = difficulty;
-            genesis.Hash = genesis.MineHash(this.Difficulty);
-            Items.Add(genesis);
+            Blocks.Add(genesis);
         }
 
-        public void Add(IBlock item)
+        public void Add(IBlock block)
         {
-            if (Items.LastOrDefault() != null)
-            {
-                item.PreviousHash = Items.LastOrDefault().Hash;
-            }
-            item.Hash = item.MineHash(this.Difficulty);
-            Items.Add(item);
+             Blocks.Add(block);
         }
 
-        public int Count => Items.Count;
-        public IBlock this[int index] { get => Items[index]; set => Items[index] = value; }
-        public List<IBlock> Items { get => items; set => items = value; }
-        public byte[] Difficulty { get; }
+        public int Count => Blocks.Count;
+        public IBlock this[int index] { get => Blocks[index]; set => Blocks[index] = value; }
+        public List<IBlock> Blocks { get => blocks; set => blocks = value; }
 
         public IEnumerator<IBlock> GetEnumerator()
         {
-            return Items.GetEnumerator();
+            return Blocks.GetEnumerator();
+        }
+
+        public IBlock LastOrDefault() 
+        {
+            return blocks.LastOrDefault();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return Items.GetEnumerator();
+            return Blocks.GetEnumerator();
+        }
+
+        public bool IsValid()
+        {
+            return true;
         }
     }
 }
