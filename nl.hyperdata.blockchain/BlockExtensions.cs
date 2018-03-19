@@ -7,7 +7,7 @@ namespace nl.hyperdata.blockchain
 {
     public static class BlockExtensions
     {
-        static  byte[] failedHash;
+        private static byte[] failedHash = null;
 
         public static byte[] GenerateHash(this IBlock block)
         {
@@ -15,20 +15,16 @@ namespace nl.hyperdata.blockchain
             using (MemoryStream stream = new MemoryStream())
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                if (block.Nonce == 0 ) {
-                    // First hash for the block. MinersPublicKey, Data, & Timestamp
-                    // Are only added to the bite[] the first time a hash is
-                    // calculated.
+                if (block.Nonce == 0 && block.MinersPublicKey.Length != 0 ) {
                     writer.Write(block.MinersPublicKey);
-                    writer.Write(block.Data);
-                    writer.Write(block.TimeStamp.ToBinary());
-                    writer.Write(block.PreviousHash);
-                 } else {
-                    writer.Write(failedHash);                   
                 }
-                // Nouce isn't actually needed. 
+                if (failedHash != null ) {
+                    writer.Write(failedHash);
+                }
+                writer.Write(block.Data);
                 writer.Write(block.Nonce);
-
+                writer.Write(block.TimeStamp.ToBinary());
+                writer.Write(block.PreviousHash);
                 var streamArray = stream.ToArray();
                 return sha.ComputeHash(streamArray);
             }
@@ -36,7 +32,6 @@ namespace nl.hyperdata.blockchain
 
         public static byte[] MineHash(this IBlock block, byte[] difficulty)
         {
-            failedHash = null;
             if(difficulty == null)
             {
                 throw new ArgumentNullException(nameof(difficulty));
@@ -44,12 +39,11 @@ namespace nl.hyperdata.blockchain
 
             byte[] hash = new byte[0];
             int d = difficulty.Length;
-
+        
             while (!hash.Take(d).SequenceEqual(difficulty) && block.Nonce <= int.MaxValue)
             {
                 block.Nonce++;
                 hash = block.GenerateHash();
-                // cache the hash encase it fails validation.
                 failedHash = hash;
             }
             return hash;
