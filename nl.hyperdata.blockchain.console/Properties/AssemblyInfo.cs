@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("nl.hyperdata.blockchain.console")]
+[assembly: AssemblyTitle("jewelzcoin.blockchain.console")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ING")]
-[assembly: AssemblyProduct("nl.hyperdata.blockchain.console")]
+[assembly: AssemblyProduct("jewelzcoin.blockchain.console")]
 [assembly: AssemblyCopyright("Copyright © ING 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

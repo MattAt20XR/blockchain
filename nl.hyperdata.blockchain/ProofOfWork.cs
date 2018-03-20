@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace nl.hyperdata.blockchain
+namespace jewelzcoin.blockchain
 {
     public static class ProofOfWork
     {
@@ -11,7 +11,7 @@ namespace nl.hyperdata.blockchain
 
         private static byte[] GenerateHash(DataForGeningHash dataForGeningHash)
         {
-            using (SHA512 sha = new SHA512Managed())
+            using (SHA256 sha = new SHA256Managed())
             using (MemoryStream stream = new MemoryStream())
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
@@ -53,7 +53,7 @@ namespace nl.hyperdata.blockchain
 
             while (!hash.Take(d).SequenceEqual(Difficulty) && block.Nonce <= int.MaxValue)
             {
-                block.Nonce++;
+                dataForGeningHash.Block.Nonce++;
                 hash = GenerateHash(dataForGeningHash);
                 dataForGeningHash.FailedHash = hash;
             }

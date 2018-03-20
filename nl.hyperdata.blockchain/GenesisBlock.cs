@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace nl.hyperdata.blockchain
+namespace jewelzcoin.blockchain
 {
     public class GenesisBlock : Block
     {

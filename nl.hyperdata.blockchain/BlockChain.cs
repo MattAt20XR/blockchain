@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace nl.hyperdata.blockchain
+namespace jewelzcoin.blockchain
 {
     public class BlockChain : IEnumerable<IBlock>
     {
