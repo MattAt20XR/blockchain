@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nl.hyperdata.blockchain", "nl.hyperdata.blockchain\nl.hyperdata.blockchain.csproj", "{89101204-5129-4958-B5FE-798AEAF2397B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jewelzcoin.blockchain", "jewelzcoin.blockchain\jewelzcoin.blockchain.csproj", "{89101204-5129-4958-B5FE-798AEAF2397B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nl.hyperdata.blockchain.console", "nl.hyperdata.blockchain.console\nl.hyperdata.blockchain.console.csproj", "{69D9E18A-2B10-4D8F-8E5C-038D8D51A65E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jewelzcoin.blockchain.console", "jewelzcoin.blockchain.console\jewelzcoin.blockchain.console.csproj", "{69D9E18A-2B10-4D8F-8E5C-038D8D51A65E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,7 +14,7 @@ Enjoy
 
 usage, as like in a Console application:
 
-      using nl.hyperdata.blockchain;
+      using jewelzcoin.blockchain;
       using System;
       using System.Linq;
 

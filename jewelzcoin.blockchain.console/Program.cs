@@ -1,11 +1,11 @@
-﻿using jewelzcoin.blockchain;
-using System;
+﻿using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using jewelzcoin.blockchain;
 
 
-namespace jewelzcoin.blockchain.console
+namespace jewelzcoin.blockchain
 {
     class Program
     {
@@ -19,6 +19,7 @@ namespace jewelzcoin.blockchain.console
             ProofOfWork.Difficulty = difficulty;
             SHA256 sha = new SHA256Managed();
             BlockChainNode node = new BlockChainNode(sha.ComputeHash(Encoding.ASCII.GetBytes(System.Environment.MachineName + blockChainNodePublicKey)));
+            Console.WriteLine("Initalizing BlockChain...\n");
             node.InitBlockChain();
 
 
