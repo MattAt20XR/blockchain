@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace nl.hyperdata.blockchain
 {
     public interface IMiner

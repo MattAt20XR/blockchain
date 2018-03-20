@@ -10,8 +10,8 @@ namespace nl.hyperdata.blockchain
     {
         private int numOfSubMiners = 3;
         private Random randMinerSelector = new Random(DateTime.Now.Millisecond);
-            
-        public BlockChain BlockChain { get; set;  }
+
+        public BlockChain BlockChain { get; set; }
         public byte[] PublicKey { get; }
         private List<IMiner> miners = new List<IMiner>();
 
@@ -20,13 +20,14 @@ namespace nl.hyperdata.blockchain
         {
             PublicKey = publicKey;
 
-            for (int i = 0; i < numOfSubMiners; i++) 
+            for (int i = 0; i < numOfSubMiners; i++)
             {
                 SHA512 sha = new SHA512Managed();
                 byte[] minerName = (sha.ComputeHash(Encoding.ASCII.GetBytes("ThisIsTheSubMinersName" + i)));
 
                 miners.Add(new SubMiner(minerName));
             }
+
             miners.Add(this);
         }
 
@@ -43,21 +44,21 @@ namespace nl.hyperdata.blockchain
             BlockChain = new BlockChain(genesis);
         }
 
-        public void ProcessTransaction(byte[] data) 
+        public void ProcessTransaction(byte[] data)
         {
             int minerIdx = randMinerSelector.Next() % miners.ToArray().Length;
 
             IMiner miner = miners[minerIdx];
-                
+
             Block block = new Block(data);
             if (BlockChain.LastOrDefault() != null)
             {
                 block.PreviousHash = BlockChain.LastOrDefault().Hash;
             }
+
             block.Hash = miner.MineHash(block);
             block.MinersPublicKey = miner.PublicKey;
             BlockChain.Add(block);
-            
         }
     }
 }

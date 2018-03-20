@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace nl.hyperdata.blockchain
 {
     public class SubMiner : IMiner
@@ -8,14 +9,12 @@ namespace nl.hyperdata.blockchain
         public SubMiner(byte[] publicKey)
         {
             PublicKey = publicKey;
-
         }
 
-        public byte[] MineHash(IBlock block) 
+        public byte[] MineHash(IBlock block)
         {
             block.MinersPublicKey = PublicKey;
             return ProofOfWork.MineHash(block, PublicKey);
         }
-  
     }
 }

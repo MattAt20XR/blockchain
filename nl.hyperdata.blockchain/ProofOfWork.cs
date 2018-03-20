@@ -7,7 +7,7 @@ namespace nl.hyperdata.blockchain
 {
     public static class ProofOfWork
     {
-        public static byte[] Difficulty { get; set;  }
+        public static byte[] Difficulty { get; set; }
 
         private static byte[] GenerateHash(DataForGeningHash dataForGeningHash)
         {
@@ -15,27 +15,31 @@ namespace nl.hyperdata.blockchain
             using (MemoryStream stream = new MemoryStream())
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                if (dataForGeningHash.Block.Nonce == 0 ) {
+                if (dataForGeningHash.Block.Nonce == 0)
+                {
                     // Is only used once to generate the hash.
                     writer.Write(dataForGeningHash.MinersPublicKey);
                     writer.Write(dataForGeningHash.Block.Data);
                     writer.Write(dataForGeningHash.Block.TimeStamp.ToBinary());
                     writer.Write(dataForGeningHash.Block.PreviousHash);
                 }
-                if (dataForGeningHash.FailedHash != null ) {
+
+                if (dataForGeningHash.FailedHash != null)
+                {
                     // By including the previous failedHash we force 
                     // serial validation.
                     writer.Write(dataForGeningHash.FailedHash);
                 }
+
                 writer.Write(dataForGeningHash.Block.Nonce);
-                 var streamArray = stream.ToArray();
+                var streamArray = stream.ToArray();
                 return sha.ComputeHash(streamArray);
             }
         }
 
         public static byte[] MineHash(IBlock block, byte[] minersPublicKey)
         {
-            if(Difficulty == null)
+            if (Difficulty == null)
             {
                 throw new ArgumentNullException(nameof(Difficulty));
             }
@@ -47,10 +51,9 @@ namespace nl.hyperdata.blockchain
             dataForGeningHash.Block = block;
             dataForGeningHash.MinersPublicKey = minersPublicKey;
 
-        
             while (!hash.Take(d).SequenceEqual(Difficulty) && block.Nonce <= int.MaxValue)
             {
-                block.Nonce++;                    
+                block.Nonce++;
                 hash = GenerateHash(dataForGeningHash);
                 dataForGeningHash.FailedHash = hash;
             }

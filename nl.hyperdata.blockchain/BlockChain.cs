@@ -15,19 +15,29 @@ namespace nl.hyperdata.blockchain
 
         public void Add(IBlock block)
         {
-             Blocks.Add(block);
+            Blocks.Add(block);
         }
 
         public int Count => Blocks.Count;
-        public IBlock this[int index] { get => Blocks[index]; set => Blocks[index] = value; }
-        public List<IBlock> Blocks { get => blocks; set => blocks = value; }
+
+        public IBlock this[int index]
+        {
+            get => Blocks[index];
+            set => Blocks[index] = value;
+        }
+
+        public List<IBlock> Blocks
+        {
+            get => blocks;
+            set => blocks = value;
+        }
 
         public IEnumerator<IBlock> GetEnumerator()
         {
             return Blocks.GetEnumerator();
         }
 
-        public IBlock LastOrDefault() 
+        public IBlock LastOrDefault()
         {
             return blocks.LastOrDefault();
         }

@@ -6,8 +6,8 @@ namespace nl.hyperdata.blockchain
     {
         byte[] Data { get; }
         byte[] Hash { get; set; }
-        int Nonce { get; set;}
-        byte[] PreviousHash { get; set;}
+        int Nonce { get; set; }
+        byte[] PreviousHash { get; set; }
         DateTime TimeStamp { get; }
         byte[] MinersPublicKey { get; set; }
     }
